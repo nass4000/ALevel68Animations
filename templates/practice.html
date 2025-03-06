@@ -1,0 +1,319 @@
+{% extends 'base.html' %}
+
+{% block title %}แบบฝึกหัด - A-Level {{ subject_data.title }}{% endblock %}
+
+{% block content %}
+<div class="hero-section" style="background-color: {{ subject_data.theme_color }};">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-4">แบบฝึกหัด<br><span class="text-highlight">{{ subject_data.title }}</span></h1>
+                <p class="lead">ฝึกทำข้อสอบเสมือนจริงเพื่อเตรียมความพร้อมในการสอบ A-Level</p>
+                <div class="practice-buttons">
+                    <a href="#practice-categories" class="btn btn-light btn-lg">
+                        <i class="fas fa-list-ul me-2"></i>ดูประเภทแบบฝึกหัด
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 d-none d-md-block">
+                <div class="hero-image">
+                    <img src="{{ url_for('static', filename='images/practice-hero-' + subject + '.svg') }}" alt="Practice Illustration" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="practice-categories" class="practice-categories-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>ประเภทแบบฝึกหัด</h2>
+            <p>เลือกประเภทแบบฝึกหัดที่ต้องการฝึกฝน</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="category-card">
+                    <div class="category-icon" style="background-color: {{ subject_data.theme_color }};">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>ฝึกแยกตามหัวข้อ</h3>
+                    <p>แบบฝึกหัดแยกตามหัวข้อเพื่อเรียนรู้ทีละส่วน</p>
+                    <div class="category-button">
+                        <a href="#topic-practice" class="btn btn-outline-primary stretched-link" style="--btn-color: {{ subject_data.theme_color }};">
+                            เริ่มทำแบบฝึกหัด
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="category-card">
+                    <div class="category-icon" style="background-color: {{ subject_data.theme_color }};">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>ข้อสอบจำลอง</h3>
+                    <p>ทำข้อสอบเสมือนจริงเพื่อประเมินความพร้อมของคุณ</p>
+                    <div class="category-button">
+                        <a href="#mock-exam" class="btn btn-outline-primary stretched-link" style="--btn-color: {{ subject_data.theme_color }};">
+                            เริ่มทำข้อสอบจำลอง
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="category-card">
+                    <div class="category-icon" style="background-color: {{ subject_data.theme_color }};">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>โจทย์ท้าทาย</h3>
+                    <p>โจทย์ระดับยากเพื่อท้าทายความสามารถของคุณ</p>
+                    <div class="category-button">
+                        <a href="#challenge" class="btn btn-outline-primary stretched-link" style="--btn-color: {{ subject_data.theme_color }};">
+                            ลองทำโจทย์ท้าทาย
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="topic-practice" class="topic-practice-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>ฝึกฝนแยกตามหัวข้อ</h2>
+            <p>เลือกส่วนและหัวข้อที่ต้องการฝึกฝน</p>
+        </div>
+
+        <div class="accordion" id="practiceAccordion">
+            {% for section in subject_data.sections %}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="practiceHeading{{ section.id }}">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#practiceCollapse{{ section.id }}" aria-expanded="true" aria-controls="practiceCollapse{{ section.id }}">
+                        <div class="section-title">
+                            <span class="section-number">ส่วนที่ {{ loop.index }}</span>
+                            <span class="section-text">{{ section.title }}</span>
+                            <span class="section-questions">{{ section.questions }}</span>
+                        </div>
+                    </button>
+                </h2>
+                <div id="practiceCollapse{{ section.id }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" aria-labelledby="practiceHeading{{ section.id }}" data-bs-parent="#practiceAccordion">
+                    <div class="accordion-body">
+                        <div class="row">
+                            {% for topic in section.topics %}
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="practice-topic-card">
+                                    <div class="topic-icon">
+                                        <i class="fas fa-{{ subject_data.icon }}"></i>
+                                    </div>
+                                    <h3>{{ topic.title }}</h3>
+                                    <div class="topic-metadata">
+                                        <span class="topic-difficulty">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </span>
+                                        <span class="topic-question-count">10 ข้อ</span>
+                                    </div>
+                                    <a href="#" class="btn btn-outline-primary stretched-link" style="--btn-color: {{ subject_data.theme_color }};">
+                                        เริ่มทำแบบฝึกหัด
+                                    </a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div id="mock-exam" class="mock-exam-section" style="background-color: rgba({{ subject_data.theme_color|replace('#', '') }}, 0.1);">
+    <div class="container">
+        <div class="section-header">
+            <h2>ข้อสอบจำลอง</h2>
+            <p>ทดสอบความพร้อมของคุณด้วยข้อสอบจำลองเสมือนจริง</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="exam-card">
+                    <div class="exam-header" style="background-color: {{ subject_data.theme_color }};">
+                        <h3>ข้อสอบจำลองชุดที่ 1</h3>
+                    </div>
+                    <div class="exam-body">
+                        <ul class="exam-details">
+                            <li><i class="fas fa-check-circle"></i> {{ subject_data.sections|length }} ส่วน ครบทุกหัวข้อ</li>
+                            <li><i class="fas fa-clock"></i> {{ subject_data.exam_info.duration }}</li>
+                            <li><i class="fas fa-question-circle"></i> {{ subject_data.exam_info.type }}</li>
+                        </ul>
+                        <div class="exam-action">
+                            <a href="#" class="btn btn-primary" style="background-color: {{ subject_data.theme_color }}; border-color: {{ subject_data.theme_color }};">
+                                เริ่มทำข้อสอบ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="exam-card">
+                    <div class="exam-header" style="background-color: {{ subject_data.theme_color }};">
+                        <h3>ข้อสอบจำลองชุดที่ 2</h3>
+                    </div>
+                    <div class="exam-body">
+                        <ul class="exam-details">
+                            <li><i class="fas fa-check-circle"></i> {{ subject_data.sections|length }} ส่วน ครบทุกหัวข้อ</li>
+                            <li><i class="fas fa-clock"></i> {{ subject_data.exam_info.duration }}</li>
+                            <li><i class="fas fa-question-circle"></i> {{ subject_data.exam_info.type }}</li>
+                        </ul>
+                        <div class="exam-action">
+                            <a href="#" class="btn btn-primary" style="background-color: {{ subject_data.theme_color }}; border-color: {{ subject_data.theme_color }};">
+                                เริ่มทำข้อสอบ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="exam-card">
+                    <div class="exam-header" style="background-color: {{ subject_data.theme_color }};">
+                        <h3>ข้อสอบจำลองชุดที่ 3</h3>
+                    </div>
+                    <div class="exam-body">
+                        <ul class="exam-details">
+                            <li><i class="fas fa-check-circle"></i> {{ subject_data.sections|length }} ส่วน ครบทุกหัวข้อ</li>
+                            <li><i class="fas fa-clock"></i> {{ subject_data.exam_info.duration }}</li>
+                            <li><i class="fas fa-question-circle"></i> {{ subject_data.exam_info.type }}</li>
+                        </ul>
+                        <div class="exam-action">
+                            <a href="#" class="btn btn-primary" style="background-color: {{ subject_data.theme_color }}; border-color: {{ subject_data.theme_color }};">
+                                เริ่มทำข้อสอบ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="challenge" class="challenge-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>โจทย์ท้าทาย</h2>
+            <p>ท้าทายความสามารถของคุณด้วยโจทย์ระดับยาก</p>
+        </div>
+
+        <div class="row">
+            {% for section in subject_data.sections %}
+            <div class="col-md-6 mb-4">
+                <div class="challenge-card">
+                    <div class="challenge-icon">
+                        <i class="fas fa-{{ subject_data.icon }}"></i>
+                    </div>
+                    <h3>โจทย์ท้าทาย: {{ section.title }}</h3>
+                    <p>โจทย์ยากในหัวข้อ{{ section.title }}เพื่อท้าทายความเข้าใจของคุณ</p>
+                    <a href="#" class="btn btn-outline-primary stretched-link" style="--btn-color: {{ subject_data.theme_color }};">
+                        ลองทำโจทย์ท้าทาย
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="exam-tips-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="exam-tips">
+                    <h2>เคล็ดลับการสอบ A-Level {{ subject_data.title }}</h2>
+                    <ul class="tips-list">
+                        <li>
+                            <div class="tip-icon" style="background-color: {{ subject_data.theme_color }};">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="tip-content">
+                                <h3>บริหารเวลาให้ดี</h3>
+                                <p>ข้อสอบ {{ subject_data.exam_info.type }} ระยะเวลา {{ subject_data.exam_info.duration }} ควรแบ่งเวลาให้เหมาะสมสำหรับแต่ละส่วน</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="tip-icon" style="background-color: {{ subject_data.theme_color }};">
+                                <i class="fas fa-check-double"></i>
+                            </div>
+                            <div class="tip-content">
+                                <h3>ตรวจทานคำตอบ</h3>
+                                <p>หากทำข้อสอบเสร็จก่อนเวลา ให้ตรวจทานคำตอบอีกครั้ง โดยเฉพาะข้อที่คุณไม่แน่ใจ</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="tip-icon" style="background-color: {{ subject_data.theme_color }};">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="tip-content">
+                                <h3>ทำข้อง่ายก่อน</h3>
+                                <p>ทำข้อที่คุณมั่นใจก่อน แล้วค่อยกลับมาทำข้อที่ยากในภายหลัง</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="progress-tracker">
+                    <h2>ความก้าวหน้าของคุณ</h2>
+                    <div class="subject-progress">
+                        <div class="progress-header">
+                            <h3>ความก้าวหน้ารวม</h3>
+                            <span class="progress-percentage">35%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 35%; background-color: {{ subject_data.theme_color }};" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="section-progress-list">
+                        {% for section in subject_data.sections %}
+                        <div class="section-progress">
+                            <div class="progress-header">
+                                <h4>{{ section.title }}</h4>
+                                <span class="progress-percentage">{{ range(20, 70)|random }}%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: {{ range(20, 70)|random }}%; background-color: {{ subject_data.theme_color }};" aria-valuenow="{{ range(20, 70)|random }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="streak-container">
+                        <div class="streak-info">
+                            <div class="streak-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="streak-text">
+                                <h4>สถิติการฝึกซ้อม</h4>
+                                <p>คุณฝึกซ้อมต่อเนื่อง <span>3 วัน</span> ติดต่อกัน!</p>
+                            </div>
+                        </div>
+                        <div class="streak-calendar">
+                            <div class="streak-day complete" style="background-color: {{ subject_data.theme_color }};">จ</div>
+                            <div class="streak-day complete" style="background-color: {{ subject_data.theme_color }};">อ</div>
+                            <div class="streak-day complete" style="background-color: {{ subject_data.theme_color }};">พ</div>
+                            <div class="streak-day">พฤ</div>
+                            <div class="streak-day">ศ</div>
+                            <div class="streak-day">ส</div>
+                            <div class="streak-day">อา</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

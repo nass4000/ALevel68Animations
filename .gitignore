@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# Manim specific
+media/
+# Uncomment the next line if you want to ignore all media files
+# But keep the media directory structure
+# media/**/*.*
+# !media/**/
+# !media/
+
+# Manim generated files
+*.log
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Operating System specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes

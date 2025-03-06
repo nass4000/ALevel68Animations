@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block title %}เกี่ยวกับ | A-Level 65 เคมี{% endblock %}
+
+{% block content %}
+<div class="about-header">
+    <div class="container">
+        <h1>เกี่ยวกับโครงการ</h1>
+        <p class="lead">แพลตฟอร์มเตรียมสอบ A-Level 65 วิชาเคมี ด้วยแอนิเมชันที่เข้าใจง่าย</p>
+    </div>
+</div>
+
+<div class="about-content">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <h2>โครงการ A-Level 68 Animations</h2>
+                <p>โครงการนี้มีวัตถุประสงค์เพื่อสร้างแอนิเมชันสำหรับการเรียนรู้วิชาเคมี ฟิสิกส์ และคณิตศาสตร์ ระดับ A-Level โดยใช้ Manim ซึ่งเป็นเครื่องมือสร้างแอนิเมชันคุณภาพสูงสำหรับการศึกษา</p>
+                <p>แอนิเมชันเหล่านี้ถูกสร้างขึ้นเพื่อให้นักเรียนเข้าใจแนวคิดที่ซับซ้อนได้ง่ายขึ้น และเตรียมพร้อมสำหรับการสอบ A-Level ปี 65 (2565) ในประเทศไทย</p>
+                <p>ทุกแอนิเมชันถูกสร้างขึ้นโดยไม่ต้องพึ่งพา LaTeX ทำให้สามารถใช้งานได้อย่างง่ายดายบนเครื่องคอมพิวเตอร์ทั่วไป</p>
+            </div>
+            <div class="col-md-6">
+                <div class="about-image text-center">
+                    <img src="{{ url_for('static', filename='images/about-illustration.svg') }}" alt="About Illustration" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">วิธีการใช้งาน</h2>
+                        <div class="usage-steps">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="step-card">
+                                        <div class="step-number">1</div>
+                                        <h3>เลือกหัวข้อที่ต้องการเรียนรู้</h3>
+                                        <p>เลือกจากส่วนต่างๆ ของข้อสอบ A-Level วิชาเคมี ที่แบ่งเป็น 3 ส่วนหลัก</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="step-card">
+                                        <div class="step-number">2</div>
+                                        <h3>ดูแอนิเมชันและศึกษาเนื้อหา</h3>
+                                        <p>เรียนรู้แนวคิดและทฤษฎีผ่านแอนิเมชันที่ทำให้เข้าใจได้ง่าย</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="step-card">
+                                        <div class="step-number">3</div>
+                                        <h3>ฝึกทำแบบฝึกหัด</h3>
+                                        <p>ทดสอบความเข้าใจของคุณผ่านแบบฝึกหัดที่มีรูปแบบเหมือนข้อสอบจริง</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card technology-card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title">เทคโนโลยีที่ใช้</h2>
+                        <ul class="tech-list">
+                            <li>
+                                <span class="tech-icon"><i class="fas fa-film"></i></span>
+                                <div class="tech-info">
+                                    <h3>Manim</h3>
+                                    <p>เครื่องมือสร้างแอนิเมชันคณิตศาสตร์ที่พัฒนาโดย 3Blue1Brown</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="tech-icon"><i class="fab fa-python"></i></span>
+                                <div class="tech-info">
+                                    <h3>Python</h3>
+                                    <p>ภาษาโปรแกรมมิ่งที่ใช้ในการพัฒนาแอนิเมชันและเว็บแอปพลิเคชัน</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="tech-icon"><i class="fas fa-flask"></i></span>
+                                <div class="tech-info">
+                                    <h3>Flask</h3>
+                                    <p>เฟรมเวิร์ค Python สำหรับพัฒนาเว็บแอปพลิเคชัน</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card contact-card">
+                    <div class="card-body">
+                        <h2 class="card-title">ติดต่อเรา</h2>
+                        <p>หากคุณมีคำถาม ข้อเสนอแนะ หรือต้องการสนับสนุนโครงการ สามารถติดต่อเราได้ผ่านช่องทางต่อไปนี้</p>
+                        <ul class="contact-list">
+                            <li>
+                                <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+                                <p>อีเมล: contact@alevel68animations.com</p>
+                            </li>
+                            <li>
+                                <span class="contact-icon"><i class="fab fa-line"></i></span>
+                                <p>Line: @alevel68animations</p>
+                            </li>
+                            <li>
+                                <span class="contact-icon"><i class="fab fa-facebook"></i></span>
+                                <p>Facebook: A-Level 68 Animations</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

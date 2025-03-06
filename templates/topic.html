@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ topic.title }} - A-Level {{ subject_data.title }}{% endblock %}
+
+{% block content %}
+<div class="topic-hero" style="background-color: {{ subject_data.theme_color }};">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ url_for('index') }}">หน้าหลัก</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url_for('subject', subject=subject) }}">{{ subject_data.title }}</a></li>
+                        <li class="breadcrumb-item"><span>{{ section.title }}</span></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ topic.title }}</li>
+                    </ol>
+                </nav>
+                <h1 class="topic-title">{{ topic.title }}</h1>
+                <div class="topic-meta">
+                    <span class="topic-section">{{ section.title }}</span>
+                    <span class="topic-subject">{{ subject_data.title }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="topic-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="topic-section mb-5">
+                    <h2>บทนำ</h2>
+                    <p class="lead">เรียนรู้เกี่ยวกับ{{ topic.title }}ด้วยแอนิเมชันที่ทำให้เข้าใจง่าย</p>
+                    <p>นี่คือเนื้อหาสำหรับหัวข้อ {{ topic.title }} ซึ่งเป็นส่วนหนึ่งของ{{ section.title }}ในการเตรียมตัวสอบ A-Level {{ subject_data.title }}</p>
+                    
+                    <div class="animation-preview">
+                        <div class="animation-container">
+                            <img src="{{ url_for('static', filename='images/animation-preview-' + subject + '.jpg') }}" alt="{{ topic.title }} Animation Preview" class="img-fluid animation-thumbnail">
+                            <a href="{{ url_for('animation', animation_path=topic.animation_path) }}" class="btn btn-primary animation-play-btn">
+                                <i class="fas fa-play"></i>
+                            </a>
+                        </div>
+                        <div class="animation-caption">
+                            <p>คลิกที่ปุ่มเพื่อดูแอนิเมชันแบบเต็ม</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-section mb-5">
+                    <h2>เนื้อหาสำคัญ</h2>
+                    <div class="key-points">
+                        <div class="key-point">
+                            <div class="key-point-icon" style="background-color: {{ subject_data.theme_color }};">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="key-point-content">
+                                <h3>หลักการพื้นฐาน</h3>
+                                <p>อธิบายหลักการพื้นฐานสำคัญของ{{ topic.title }}ที่จำเป็นต้องรู้ในการทำข้อสอบ</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon" style="background-color: {{ subject_data.theme_color }};">
+                                <i class="fas fa-puzzle-piece"></i>
+                            </div>
+                            <div class="key-point-content">
+                                <h3>การประยุกต์ใช้</h3>
+                                <p>การนำ{{ topic.title }}ไปใช้ในการแก้ปัญหาในข้อสอบ A-Level และในชีวิตจริง</p>
+                            </div>
+                        </div>
+                        <div class="key-point">
+                            <div class="key-point-icon" style="background-color: {{ subject_data.theme_color }};">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="key-point-content">
+                                <h3>ข้อควรระวัง</h3>
+                                <p>ข้อผิดพลาดที่พบบ่อยและวิธีการหลีกเลี่ยงเมื่อทำโจทย์เกี่ยวกับ{{ topic.title }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-section mb-5">
+                    <h2>แบบฝึกหัดตัวอย่าง</h2>
+                    <div class="sample-questions">
+                        <div class="sample-question">
+                            <div class="question-header">
+                                <span class="question-number">ข้อที่ 1</span>
+                                <span class="question-difficulty" style="background-color: {{ subject_data.theme_color }};">ระดับง่าย</span>
+                            </div>
+                            <div class="question-content">
+                                <p>คำถามตัวอย่างเกี่ยวกับ{{ topic.title }}ที่ระดับความยากง่าย</p>
+                                <div class="question-options">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q1" id="q1_a">
+                                        <label class="form-check-label" for="q1_a">
+                                            ตัวเลือก ก.
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q1" id="q1_b">
+                                        <label class="form-check-label" for="q1_b">
+                                            ตัวเลือก ข.
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q1" id="q1_c">
+                                        <label class="form-check-label" for="q1_c">
+                                            ตัวเลือก ค.
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q1" id="q1_d">
+                                        <label class="form-check-label" for="q1_d">
+                                            ตัวเลือก ง.
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q1" id="q1_e">
+                                        <label class="form-check-label" for="q1_e">
+                                            ตัวเลือก จ.
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="question-solution">
+                                    <h4>เฉลย: ก.</h4>
+                                    <p>อธิบายเหตุผลของคำตอบที่ถูกต้อง</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sample-question">
+                            <div class="question-header">
+                                <span class="question-number">ข้อที่ 2</span>
+                                <span class="question-difficulty medium" style="background-color: {{ subject_data.theme_dark }};">ระดับปานกลาง</span>
+                            </div>
+                            <div class="question-content">
+                                <p>คำถามตัวอย่างเกี่ยวกับ{{ topic.title }}ที่ระดับความยากปานกลาง</p>
+                                <div class="question-options">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q2" id="q2_a">
+                                        <label class="form-check-label" for="q2_a">
+                                            ตัวเลือก ก.
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q2" id="q2_b">
+                                        <label class="form-check-label" for="q2_b">
+                                            ตัวเลือก ข.
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q2" id="q2_c">
+                                        <label class="form-check-label" for="q2_c">
+                                            ตัวเลือก ค.
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q2" id="q2_d">
+                                        <label class="form-check-label" for="q2_d">
+                                            ตัวเลือก ง.
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="q2" id="q2_e">
+                                        <label class="form-check-label" for="q2_e">
+                                            ตัวเลือก จ.
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="question-solution">
+                                    <h4>เฉลย: ค.</h4>
+                                    <p>อธิบายเหตุผลของคำตอบที่ถูกต้อง</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="{{ url_for('practice', subject=subject) }}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-pencil-alt me-2"></i>ทำแบบฝึกหัดเพิ่มเติม
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="related-topics" style="background-color: rgba({{ subject_data.theme_color|replace('#', '') }}, 0.1);">
+    <div class="container">
+        <h2>หัวข้อที่เกี่ยวข้อง</h2>
+        <div class="row">
+            {% for related_topic in section.topics %}
+                {% if related_topic.id != topic.id %}
+                <div class="col-md-4 mb-4">
+                    <a href="{{ url_for('topic', subject=subject, section_id=section.id, topic_id=related_topic.id) }}" class="related-topic-link">
+                        <div class="related-topic-card">
+                            <div class="related-topic-icon" style="background-color: {{ subject_data.theme_color }};">
+                                <i class="fas fa-{{ subject_data.icon }}"></i>
+                            </div>
+                            <h3>{{ related_topic.title }}</h3>
+                            <span class="related-topic-arrow"><i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

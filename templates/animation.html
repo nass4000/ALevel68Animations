@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+
+{% block title %}แอนิเมชัน - A-Level {{ subject_data.title }}{% endblock %}
+
+{% block content %}
+<div class="animation-hero" style="background-color: {{ subject_data.theme_color }};">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-4">{{ animation.title }}</h1>
+                <p class="lead">{{ animation.description }}</p>
+                <div class="animation-metadata">
+                    <span class="animation-topic">
+                        <i class="fas fa-tag"></i> {{ topic.title }}
+                    </span>
+                    <span class="animation-duration">
+                        <i class="fas fa-clock"></i> {{ animation.duration }}
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-6 d-none d-md-block">
+                <div class="animation-thumbnail">
+                    <img src="{{ url_for('static', filename='images/thumbnails/' + animation.thumbnail) }}" alt="{{ animation.title }}" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="animation-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="animation-player mb-4">
+                    <div class="video-container">
+                        <div class="ratio ratio-16x9">
+                            <div id="manim-canvas" class="manim-player">
+                                <!-- Manim animation will be loaded here -->
+                                <div class="animation-placeholder d-flex align-items-center justify-content-center" style="background-color: rgba({{ subject_data.theme_color|replace('#', '') }}, 0.1);">
+                                    <div class="text-center">
+                                        <div class="spinner-border" style="color: {{ subject_data.theme_color }};" role="status">
+                                            <span class="visually-hidden">กำลังโหลด...</span>
+                                        </div>
+                                        <p class="mt-3">กำลังโหลดแอนิเมชัน...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="animation-controls mt-3 d-flex justify-content-between">
+                        <div class="control-group">
+                            <button class="btn btn-outline-primary me-2" id="play-pause" style="--btn-color: {{ subject_data.theme_color }};">
+                                <i class="fas fa-play"></i> เล่น
+                            </button>
+                            <button class="btn btn-outline-primary me-2" id="restart" style="--btn-color: {{ subject_data.theme_color }};">
+                                <i class="fas fa-redo"></i> เริ่มใหม่
+                            </button>
+                        </div>
+                        <div class="control-group">
+                            <button class="btn btn-outline-primary me-2" id="slower" style="--btn-color: {{ subject_data.theme_color }};">
+                                <i class="fas fa-minus"></i> ช้าลง
+                            </button>
+                            <button class="btn btn-outline-primary" id="faster" style="--btn-color: {{ subject_data.theme_color }};">
+                                <i class="fas fa-plus"></i> เร็วขึ้น
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="animation-details mb-4">
+                    <h2>คำอธิบาย</h2>
+                    <p>{{ animation.details|safe }}</p>
+                </div>
+
+                <div class="animation-key-concepts mb-4">
+                    <h2>หลักการสำคัญ</h2>
+                    <div class="key-concepts-list">
+                        {% for concept in animation.key_concepts %}
+                        <div class="key-concept">
+                            <div class="concept-icon" style="background-color: {{ subject_data.theme_color }};">
+                                <i class="fas fa-{{ concept.icon }}"></i>
+                            </div>
+                            <div class="concept-content">
+                                <h3>{{ concept.title }}</h3>
+                                <p>{{ concept.description }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="animation-equations mb-4">
+                    <h2>สมการที่เกี่ยวข้อง</h2>
+                    <div class="equations-list">
+                        {% for equation in animation.equations %}
+                        <div class="equation-card">
+                            <div class="equation-name">{{ equation.name }}</div>
+                            <div class="equation">{{ equation.formula }}</div>
+                            <div class="equation-description">{{ equation.description }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="sidebar sticky-top">
+                    <div class="related-animations mb-4">
+                        <h3>แอนิเมชันที่เกี่ยวข้อง</h3>
+                        <div class="related-animations-list">
+                            {% for related in animation.related_animations %}
+                            <a href="{{ url_for('animation', subject=subject, topic_id=related.topic_id, animation_id=related.id) }}" class="related-animation-card">
+                                <div class="related-thumbnail">
+                                    <img src="{{ url_for('static', filename='images/thumbnails/' + related.thumbnail) }}" alt="{{ related.title }}">
+                                </div>
+                                <div class="related-info">
+                                    <h4>{{ related.title }}</h4>
+                                    <span class="related-topic">{{ related.topic }}</span>
+                                    <span class="related-duration">{{ related.duration }}</span>
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="practice-suggestion">
+                        <div class="card">
+                            <div class="card-header" style="background-color: {{ subject_data.theme_color }}; color: white;">
+                                <h3 class="mb-0">ทดสอบความเข้าใจ</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>ต้องการทดสอบความเข้าใจในหัวข้อนี้หรือไม่? ลองทำแบบฝึกหัดเพื่อวัดความเข้าใจของคุณ</p>
+                                <a href="{{ url_for('practice', subject=subject) }}#topic-practice" class="btn btn-primary w-100" style="background-color: {{ subject_data.theme_color }}; border-color: {{ subject_data.theme_color }};">
+                                    เริ่มทำแบบฝึกหัด
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="animation-navigation" style="background-color: rgba({{ subject_data.theme_color|replace('#', '') }}, 0.1);">
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            {% if animation.prev_animation %}
+            <a href="{{ url_for('animation', subject=subject, topic_id=topic.id, animation_id=animation.prev_animation.id) }}" class="nav-link">
+                <i class="fas fa-arrow-left me-2"></i> {{ animation.prev_animation.title }}
+            </a>
+            {% else %}
+            <div></div>
+            {% endif %}
+
+            <a href="{{ url_for('topic', subject=subject, topic_id=topic.id) }}" class="nav-link">
+                <i class="fas fa-th me-2"></i> กลับไปที่หัวข้อ
+            </a>
+
+            {% if animation.next_animation %}
+            <a href="{{ url_for('animation', subject=subject, topic_id=topic.id, animation_id=animation.next_animation.id) }}" class="nav-link">
+                {{ animation.next_animation.title }} <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+            {% else %}
+            <div></div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/manim-player.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Load the animation data
+        const animationPath = "{{ url_for('static', filename='animations/' + subject + '/' + animation.file_path) }}";
+        
+        // Initialize the Manim player
+        // This is a placeholder for the actual Manim integration
+        setTimeout(() => {
+            const placeholder = document.querySelector('.animation-placeholder');
+            if (placeholder) {
+                placeholder.innerHTML = `
+                    <div class="text-center">
+                        <div class="preview-image">
+                            <img src="{{ url_for('static', filename='images/animations/' + animation.preview_image) }}" alt="Animation preview" class="img-fluid">
+                        </div>
+                        <p class="mt-3">This is a placeholder for the Manim animation: ${animationPath}</p>
+                        <p>Actual integration with Manim will be implemented in future updates.</p>
+                    </div>
+                `;
+            }
+        }, 1500);
+        
+        // Handle play/pause button
+        const playPauseBtn = document.getElementById('play-pause');
+        if (playPauseBtn) {
+            playPauseBtn.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('fa-play')) {
+                    icon.classList.remove('fa-play');
+                    icon.classList.add('fa-pause');
+                    this.querySelector('i + span').textContent = ' หยุดชั่วคราว';
+                    // Play animation code will go here
+                } else {
+                    icon.classList.remove('fa-pause');
+                    icon.classList.add('fa-play');
+                    this.querySelector('i + span').textContent = ' เล่น';
+                    // Pause animation code will go here
+                }
+            });
+        }
+        
+        // Other player controls would be implemented here
+    });
+</script>
+{% endblock %}

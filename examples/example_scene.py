@@ -15,13 +15,13 @@ class BasicExample(Scene):
         self.play(FadeIn(subtitle), run_time=0.5)
         self.wait(1)
         
-        # Create and display a mathematical equation
-        eq = MathTex(r"E = mc^2", font_size=48)
+        # Create and display a text equation instead of MathTex
+        eq = Text("E = mc²", font_size=48)
         self.play(Write(eq))
         self.wait(1)
         
-        # Transform the equation
-        eq2 = MathTex(r"E^2 = (mc^2)^2 + (pc)^2", font_size=48)
+        # Transform to another text equation
+        eq2 = Text("E² = (mc²)² + (pc)²", font_size=48)
         self.play(Transform(eq, eq2))
         self.wait(1)
         

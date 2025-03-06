@@ -9,11 +9,22 @@ ALevel68Animations/
 ├── requirements.txt       # Project dependencies
 ├── README.md             # This file
 ├── examples/             # Example animations
+├── utils.py              # Utility functions and reusable components
 ├── assets/               # Images, fonts, etc.
 ├── physics/              # Physics animations
+│   └── projectile_motion.py  # Projectile motion simulations
 ├── mathematics/          # Mathematics animations
+│   └── calculus_derivatives.py  # Calculus animations
 └── chemistry/            # Chemistry animations
+    └── atomic_structure.py  # Atomic structure visualizations
 ```
+
+## Features
+
+- Educational animations tailored for Thai A-Level curriculum
+- No LaTeX dependency required - all mathematical formulas use Manim's Text objects
+- Consistent styling with reusable components
+- Thai language support
 
 ## Installation
 
@@ -42,7 +53,12 @@ pip install -r requirements.txt
 To render an animation:
 
 ```bash
-manim -pql physics/example_scene.py ExampleScene
+manim -pql physics/projectile_motion.py ExampleScene
+```
+
+Or use the provided batch file on Windows:
+```bash
+run_manim.bat physics/projectile_motion.py ExampleScene
 ```
 
 Parameters:
@@ -50,6 +66,12 @@ Parameters:
 - `-l`: Use low quality (faster)
 - `-ql`: Use medium quality
 - `-qh`: Use high quality (slower)
+
+## Project Notes
+
+- All animations use Text objects instead of MathTex, eliminating the need for a LaTeX installation
+- The project includes TitleBlock and other reusable components in utils.py
+- Manim version used: v0.17.3
 
 ## Contributing
 

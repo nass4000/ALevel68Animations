@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}A-Level การเตรียมตัวสอบ - เคมี คณิตศาสตร์ และฟิสิกส์{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-4">A-Level การเตรียมตัวสอบ</h1>
+                <p class="lead">เตรียมพร้อมสำหรับการสอบด้วยเนื้อหาครบถ้วนและแอนิเมชันที่เข้าใจง่าย</p>
+                <div class="hero-message">
+                    <p>เลือกวิชาที่ต้องการเตรียมตัวสอบจากตัวเลือกด้านล่าง</p>
+                </div>
+            </div>
+            <div class="col-md-6 d-none d-md-block">
+                <div class="hero-image">
+                    <img src="{{ url_for('static', filename='images/alevel-hero.svg') }}" alt="A-Level Illustration" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="subjects-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>เลือกวิชาที่ต้องการเรียน</h2>
+            <p>เรามีเนื้อหาครบถ้วนสำหรับการเตรียมตัวสอบ A-Level</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="subject-card chemistry">
+                    <div class="subject-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>เคมี</h3>
+                    <p>ข้อสอบ A-Level 65 วิชาเคมี</p>
+                    <ul class="subject-features">
+                        <li><i class="fas fa-check"></i> 3 ส่วนหลัก</li>
+                        <li><i class="fas fa-check"></i> 35 ข้อสอบ</li>
+                        <li><i class="fas fa-check"></i> 90 นาที</li>
+                    </ul>
+                    <a href="{{ url_for('subject', subject='chemistry') }}" class="btn btn-chemistry">
+                        <i class="fas fa-arrow-right me-2"></i>เริ่มเรียน
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="subject-card mathematics">
+                    <div class="subject-icon">
+                        <i class="fas fa-square-root-variable"></i>
+                    </div>
+                    <h3>คณิตศาสตร์</h3>
+                    <p>ข้อสอบ A-Level 61 วิชาคณิตศาสตร์ประยุกต์ 1</p>
+                    <ul class="subject-features">
+                        <li><i class="fas fa-check"></i> 4 ส่วนหลัก</li>
+                        <li><i class="fas fa-check"></i> 30 ข้อสอบ</li>
+                        <li><i class="fas fa-check"></i> 90 นาที</li>
+                    </ul>
+                    <a href="{{ url_for('subject', subject='mathematics') }}" class="btn btn-mathematics">
+                        <i class="fas fa-arrow-right me-2"></i>เริ่มเรียน
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="subject-card physics">
+                    <div class="subject-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h3>ฟิสิกส์</h3>
+                    <p>ข้อสอบ A-Level 64 วิชาฟิสิกส์</p>
+                    <ul class="subject-features">
+                        <li><i class="fas fa-check"></i> 5 ส่วนหลัก</li>
+                        <li><i class="fas fa-check"></i> 35 ข้อสอบ</li>
+                        <li><i class="fas fa-check"></i> 90 นาที</li>
+                    </ul>
+                    <a href="{{ url_for('subject', subject='physics') }}" class="btn btn-physics">
+                        <i class="fas fa-arrow-right me-2"></i>เริ่มเรียน
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="features-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>ทำไมต้องเรียนกับเรา</h2>
+            <p>เราใช้เทคโนโลยีแอนิเมชันเพื่อให้การเรียนรู้ง่ายและสนุกขึ้น</p>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3>แอนิเมชันคุณภาพสูง</h3>
+                    <p>ใช้เทคนิคแอนิเมชันแบบ Manim สร้างภาพที่เข้าใจง่ายและน่าสนใจ</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>เนื้อหาครบถ้วน</h3>
+                    <p>ครอบคลุมทุกหัวข้อตามโครงสร้างข้อสอบ A-Level ทั้ง 3 วิชา</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>แบบฝึกหัดเสมือนจริง</h3>
+                    <p>ฝึกทำข้อสอบในรูปแบบเดียวกับข้อสอบจริงพร้อมเฉลยละเอียด</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
